@@ -1,0 +1,42 @@
+<div class="form-group">
+  <div class="row">
+    <input type="text" [formControl]="queryText" />
+
+    <button type="button" (click)="onClickSearch()">
+      {{ "Buscar" }}
+    </button>
+  </div>
+
+  <div *ngIf="results != null" class="container">
+    <ng-container *ngFor="let img of results">
+
+      <div>
+        <div>
+          <lib-ngx-image-zoom
+          [thumbImage]= img.urls.regular
+          [fullImage]= img.urls.full
+          [magnification]="1"
+          [enableScrollZoom]="true"
+          [enableLens]="true"
+          [lensWidth]="300">
+        </lib-ngx-image-zoom>
+      </div>
+        <div class="align-middle">
+          <h5>Detalles</h5>
+          <p>{{ "Id:" }} {{ img.id }}</p>
+          <p>{{ "Descripcion:" }} {{ img.description }}</p>
+          <p>{{ "Likes:" }} {{ img.likes }}</p>
+          <p>{{ "Creador:" }} {{ img.user.username }}</p>
+          <p>{{ "Creado el día:" }} {{ img.created_at}}</p>
+          <p>{{ "Actualizado el día:" }} {{ img.updated_at }}</p>
+          <p>{{ "Promociado el día:" }} {{ img.promoted_at}}</p>
+        </div>
+      </div>
+
+
+    </ng-container>
+
+    <p>{{ "Resultados mostrados:" }} {{ results.length }}</p>
+    <p>{{ "Resultados totales encontrados:" }} {{ total }}</p>
+  </div>
+</div>
